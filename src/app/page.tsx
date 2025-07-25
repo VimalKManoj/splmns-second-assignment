@@ -100,10 +100,10 @@ export default function Home() {
     <div className="min-h-screen flex flex-col justify-between items-start pt-32 p-20 relative bg-black">
       <div className="absolute top-0 left-0 w-full h-full ">
         <Image
-          src="/background.png"
+          src="/background.jpg"
           alt="background"
-          width={3000}
-          height={3000}
+          width={1000}
+          height={1000}
           className="object-cover w-full h-full -z-20"
         />
       </div>
@@ -181,7 +181,7 @@ export default function Home() {
           <span className="fire bg-gradient-to-r from-orange-300 to-orange-700 text-white inline-block px-3 cursor-pointer">
             Fire
           </span>{" "}
-          , 
+          ,
           <span className="water bg-gradient-to-r from-cyan-300 to-cyan-700 text-white inline-block px-3 cursor-pointer ">
             Water
           </span>{" "}

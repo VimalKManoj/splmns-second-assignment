@@ -7,10 +7,10 @@ function VideoWatch() {
     <div className="min-h-screen flex justify-center items-center w-full ">
       <div className="absolute top-0 left-0 w-full h-full ">
         <Image
-          src="/video-background.png"
+          src="/video-background.jpg"
           alt="background"
-          width={3000}
-          height={3000}
+          width={1000}
+          height={1000}
           className="object-cover w-full h-full -z-40"
         />
       </div>

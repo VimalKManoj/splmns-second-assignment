@@ -9,8 +9,8 @@ function QRScan() {
         <Image
           src="/qr-code-background.png"
           alt="background"
-          width={3000}
-          height={3000}
+          width={1000}
+          height={1000}
           className="object-cover w-full h-full -z-40"
         />
       </div>
