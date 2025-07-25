@@ -10,6 +10,8 @@ function QRScan() {
           src="/qr-code-background.png"
           alt="background"
           width={1000}
+          fetchPriority="high"
+          priority
           height={1000}
           className="object-cover w-full h-full -z-40"
         />

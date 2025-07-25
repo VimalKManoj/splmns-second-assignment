@@ -16,8 +16,10 @@ function Wallet() {
         <Image
           src="/wallet-background.jpg"
           alt="background"
-          width={3000}
-          height={3000}
+          width={1000}
+          height={1000}
+          fetchPriority="high"
+          priority
           className="object-cover w-full h-full -z-40"
         />
       </div>

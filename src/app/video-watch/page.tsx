@@ -11,6 +11,8 @@ function VideoWatch() {
           alt="background"
           width={1000}
           height={1000}
+          fetchPriority="high"
+          priority
           className="object-cover w-full h-full -z-40"
         />
       </div>
