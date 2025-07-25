@@ -1,16 +1,16 @@
 import React, { useRef } from "react";
 import { Play } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
+
 import { Shard } from "../WalletComponent";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const play = Play({
-  variable: "--font-play",
-  weight: "400",
-  subsets: ["latin"],
-});
+// const play = Play({
+//   variable: "--font-play",
+//   weight: "400",
+//   subsets: ["latin"],
+// });
 
 function RewardUnlocked({
   shard,

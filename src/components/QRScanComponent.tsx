@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Turret_Road, Play } from "next/font/google";
 
 import Link from "next/link";
+import { RewardEvent } from "./LocationCheckinComponent";
 
 const turretRoad = Turret_Road({
   variable: "--font-turret-road",
@@ -24,7 +25,7 @@ const COOLDOWN_MS = 60_000; // 1 minute
 function saveReward() {
   const existing = JSON.parse(
     localStorage.getItem(REWARDS_KEY) || "[]"
-  ) as any[];
+  ) as RewardEvent[];
   existing.push({
     id: Date.now(),
     type: "code-scan",

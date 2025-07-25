@@ -66,7 +66,7 @@ export default function Home() {
   useEffect(() => {
     const locDone = !!localStorage.getItem(COMPLETED.location);
     const vidDone = !!localStorage.getItem(COMPLETED.video);
-    const codeDone = !!localStorage.getItem(COMPLETED.code);
+    // const codeDone = !!localStorage.getItem(COMPLETED.code);
 
     setUnlocked({
       location: true,

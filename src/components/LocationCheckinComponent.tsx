@@ -40,6 +40,14 @@ const STADIUM_LAT = 48.2188;
 const STADIUM_LNG = 11.6247;
 const COOLDOWN_MS = 60_000; // 1 minute
 
+// Reward event type for local rewards
+export interface RewardEvent {
+  id: number;
+  type: "check-in" | "video-watch" | "code-scan";
+  earnedAt: string;
+  description: string;
+}
+
 export default function LocationCheckIn() {
   const [distance, setDistance] = useState<number | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -69,7 +77,7 @@ export default function LocationCheckIn() {
   const saveReward = () => {
     const existing = JSON.parse(
       localStorage.getItem(REWARDS_KEY) || "[]"
-    ) as any[];
+    ) as RewardEvent[];
     existing.push({
       id: Date.now(),
       type: "check-in",
