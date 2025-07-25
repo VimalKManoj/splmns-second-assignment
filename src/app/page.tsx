@@ -110,7 +110,7 @@ export default function Home() {
         />
       </div>
       <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/90 to-transparent z-40"></div>
-      <div className="z-40 flex flex-col md:flex-row justify-center items-center md:items-start w-full gap-20">
+      <div className="z-40 flex flex-col md:flex-row justify-center items-center md:items-start w-full gap-20 flex-wrap">
         <ActionCard
           title="Check In at the Landmark"
           description="Arrive at the designated location to unlock your next Shard."
@@ -121,7 +121,7 @@ export default function Home() {
         />
 
         {/* Video card wrapped in ref */}
-        <div ref={videoRef} className="transform-gpu">
+        <div ref={videoRef} className="transform-gpu ">
           <ActionCard
             title="Watch the Mystic Chronicle"
             description="View 15 seconds of the mystic video to claim your next Shard."
@@ -147,7 +147,7 @@ export default function Home() {
 
       <div className="flex flex-col md:flex-row justify-end gap-10 md:gap-0 items-end z-50">
         <h1
-          className={`z-40 ${turretRoad.className} mt-20 md:mt-0 text-5xl flex-1 text-white md:text-nowrap relative`}
+          className={`z-40 ${turretRoad.className} mt-20 md:mt-0 text-5xl flex-1 text-white lg:text-nowrap relative`}
         >
           <Image
             src="/elements/earth-two.png"
@@ -170,7 +170,7 @@ export default function Home() {
             height={300}
             className="object-contain w-auto h-22 absolute -top-20 md:-top-16  left-40"
           />
-          Unlock the Power of the <span className="md:text-8xl">3</span>
+          Unlock the Power of the <span className="lg:text-8xl">3</span>
         </h1>
         <h1
           className={`w-full md:w-2/4 text-white/80 ${play.className} p-6 border border-[#25D2BE]  text-sm text-white bg-black/30 backdrop-blur-sm`}

@@ -177,7 +177,7 @@ export default function WalletComponent({
           Reset All Rewards
         </button>
       </div>
-      <div className="flex w-full gap-10">
+      <div className="flex flex-col lg:flex-row w-full gap-10">
         {/* Pending Rewards */}
         <div className="flex-1 flex flex-col w-full gap-10">
           {/* Avatar Editor */}
@@ -350,9 +350,11 @@ export default function WalletComponent({
               );
             })}
           </div>
-          {/* <button>
-          All Shards Collected
-         </button> */}
+          {ELEMENTS.every((elm) => shardCounts[elm] > 0) && (
+            <div className="mt-20 p-4 bg-gradient-to-r from-purple-700 to-indigo-600 text-white  text-center shadow-lg">
+              🌟 Now you have become the <strong>Elemental Master</strong>! 🌟
+            </div>
+          )}
         </div>
       </div>
       {/* */}
