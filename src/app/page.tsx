@@ -1,103 +1,196 @@
+"use client";
+import ActionCard from "@/components/Landing Page/action-card";
 import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import { Turret_Road, Play } from "next/font/google";
+import gsap from "gsap";
+
+const turretRoad = Turret_Road({
+  variable: "--font-turret-road",
+  weight: "700",
+  subsets: ["latin"],
+});
+
+const play = Play({
+  variable: "--font-play",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const COOLDOWNS = {
+  location: { key: "lastCheckIn", ms: 60_000 },
+  video: { key: "lastVideoWatch", ms: 60_000 },
+  code: { key: "lastCodeScan", ms: 60_000 },
+};
+
+const COMPLETED = {
+  location: "completed_location",
+  video: "completed_video",
+  code: "completed_code",
+};
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // cooldown timers
+  const [cds, setCds] = useState({ location: 0, video: 0, code: 0 });
+  // unlocked flags
+  const [unlocked, setUnlocked] = useState({
+    location: true,
+    video: false,
+    code: false,
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // refs to each card container
+  const videoRef = useRef<HTMLDivElement>(null);
+  const codeRef = useRef<HTMLDivElement>(null);
+
+  // compute ms remaining
+  const computeCd = (key: string, ms: number) => {
+    const last = parseInt(localStorage.getItem(key) || "0", 10);
+    return Math.max(0, ms - (Date.now() - last));
+  };
+
+  // tick cooldowns
+  useEffect(() => {
+    const update = () =>
+      setCds({
+        location: computeCd(COOLDOWNS.location.key, COOLDOWNS.location.ms),
+        video: computeCd(COOLDOWNS.video.key, COOLDOWNS.video.ms),
+        code: computeCd(COOLDOWNS.code.key, COOLDOWNS.code.ms),
+      });
+    update();
+    const iv = setInterval(update, 1000);
+    return () => clearInterval(iv);
+  }, []);
+
+  // on mount, read completion and unlock in order
+  useEffect(() => {
+    const locDone = !!localStorage.getItem(COMPLETED.location);
+    const vidDone = !!localStorage.getItem(COMPLETED.video);
+    const codeDone = !!localStorage.getItem(COMPLETED.code);
+
+    setUnlocked({
+      location: true,
+      video: locDone,
+      code: vidDone,
+    });
+  }, []);
+
+  // animate flip when video unlocks
+  useEffect(() => {
+    if (unlocked.video && videoRef.current) {
+      gsap.fromTo(
+        videoRef.current,
+        { rotateY: 90, transformPerspective: 600, force3D: true },
+        { rotateY: 0, duration: 2.5, ease: "power4.out" }
+      );
+    }
+  }, [unlocked.video]);
+
+  // animate flip when code unlocks
+  useEffect(() => {
+    if (unlocked.code && codeRef.current) {
+      gsap.fromTo(
+        codeRef.current,
+        { rotateY: 90, transformPerspective: 600, force3D: true },
+        { rotateY: 0, duration: 2.5, ease: "power4.out", delay: 0.1 }
+      );
+    }
+  }, [unlocked.code]);
+  return (
+    <div className="min-h-screen flex flex-col justify-between items-start pt-32 p-20 relative bg-black">
+      <div className="absolute top-0 left-0 w-full h-full ">
+        <Image
+          src="/background.png"
+          alt="background"
+          width={3000}
+          height={3000}
+          className="object-cover w-full h-full -z-20"
+        />
+      </div>
+      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/90 to-transparent z-40"></div>
+      <div className="z-40 flex flex-col md:flex-row justify-center items-center md:items-start w-full gap-20">
+        <ActionCard
+          title="Check In at the Landmark"
+          description="Arrive at the designated location to unlock your next Shard."
+          imageSrc="/location.png"
+          href="/location-checkin"
+          cooldown={cds.location}
+          enabled={true}
+        />
+
+        {/* Video card wrapped in ref */}
+        <div ref={videoRef} className="transform-gpu">
+          <ActionCard
+            title="Watch the Mystic Chronicle"
+            description="View 15 seconds of the mystic video to claim your next Shard."
+            imageSrc="/video.png"
+            href={unlocked.video ? "/video-watch" : "#"}
+            cooldown={cds.video}
+            enabled={unlocked.video}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* QR card wrapped in ref */}
+        <div ref={codeRef} className="transform-gpu">
+          <ActionCard
+            title="Scan the Arcane Sigil"
+            description="Use your camera to scan the hidden QR sigil and unveil your next Shard."
+            imageSrc="/qr-code.png"
+            href={unlocked.code ? "/qr-scan" : "#"}
+            cooldown={cds.code}
+            enabled={unlocked.code}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row justify-end gap-10 md:gap-0 items-end z-50">
+        <h1
+          className={`z-40 ${turretRoad.className} mt-20 md:mt-0 text-5xl flex-1 text-white md:text-nowrap relative`}
         >
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/elements/earth-two.png"
+            alt="earth"
+            width={300}
+            height={300}
+            className="object-contain w-auto h-20 absolute -top-20 md:-top-16  left-0"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src="/elements/fire-two.png"
+            alt="earth"
+            width={300}
+            height={300}
+            className="object-contain w-auto h-20 absolute -top-20 md:-top-16  left-20"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+            src="/elements/water-two.png"
+            alt="earth"
+            width={300}
+            height={300}
+            className="object-contain w-auto h-22 absolute -top-20 md:-top-16  left-40"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Unlock the Power of the <span className="md:text-8xl">3</span>
+        </h1>
+        <h1
+          className={`w-full md:w-2/4 text-white/80 ${play.className} p-6 border border-[#25D2BE]  text-sm text-white bg-black/30 backdrop-blur-sm`}
+        >
+          Embark on a journey to collect three ancient shards—
+          <span className="earth bg-gradient-to-r from-emerald-500 to-emerald-700 text-white inline-block px-3 cursor-pointer relative ">
+            Earth
+          </span>{" "}
+          ,{" "}
+          <span className="fire bg-gradient-to-r from-orange-300 to-orange-700 text-white inline-block px-3 cursor-pointer">
+            Fire
+          </span>{" "}
+          , 
+          <span className="water bg-gradient-to-r from-cyan-300 to-cyan-700 text-white inline-block px-3 cursor-pointer ">
+            Water
+          </span>{" "}
+          —by completing simple real‑world tasks. Check in at the legendary
+          location, watch a 15‑second scroll, or scan the hidden sigil to earn a
+          random Shard each time. Gather all three to become the Elemental
+          Master and unlock your ultimate reward!
+        </h1>
+      </div>
     </div>
   );
 }
