@@ -153,12 +153,12 @@ export default function WalletComponent({
 
   return (
     <div
-      className={`p-6 max-w-7xl mx-auto pt-28 w-full h-screen  z-40 flex flex-col gap-10 relative ${play.className}`}
+      className={`p-6 max-w-7xl mx-auto pt-28 w-full min-h-screen md:h-screen  z-40 flex flex-col gap-6 md:gap-10 relative ${play.className}`}
       ref={container}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center md:justify-between items-center flex-wrap">
         <h2
-          className={`text-2xl font-semibold flex items-center gap-2 ${turretRoad.className}`}
+          className={`md:text-2xl font-semibold flex items-center gap-2 ${turretRoad.className}`}
         >
           Your Wallet —{" "}
           <Image
@@ -166,7 +166,7 @@ export default function WalletComponent({
             alt="avatar"
             width={80}
             height={80}
-            className="rounded-full border-2  ml-2"
+            className="rounded-full border-2   ml-2"
           />
           <span className="ml-1 text-white">{avatarName || "Adventurer"}</span>
         </h2>
@@ -177,7 +177,7 @@ export default function WalletComponent({
           Reset All Rewards
         </button>
       </div>
-      <div className="flex flex-col lg:flex-row w-full gap-10">
+      <div className="flex flex-col lg:flex-row w-full gap-6 md:gap-10">
         {/* Pending Rewards */}
         <div className="flex-1 flex flex-col w-full gap-10">
           {/* Avatar Editor */}

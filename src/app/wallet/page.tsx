@@ -11,7 +11,7 @@ function Wallet() {
     open: false,
   });
   return (
-    <div className="h-screen flex items-center gap-10 lg:p-20 w-full relative">
+    <div className="h-full md:h-screen flex items-center gap-10 lg:p-20 w-full relative">
       <div className="absolute top-0 left-0 w-full h-full ">
         <Image
           src="/wallet-background.jpg"

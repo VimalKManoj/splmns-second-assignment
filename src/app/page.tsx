@@ -97,7 +97,7 @@ export default function Home() {
     }
   }, [unlocked.code]);
   return (
-    <div className="min-h-screen flex flex-col justify-between items-start pt-32 p-20 relative bg-black">
+    <div className="min-h-screen flex flex-col justify-between items-start pt-32 p-4 md:p-20 relative bg-black">
       <div className="absolute top-0 left-0 w-full h-full ">
         <Image
           src="/background.jpg"
