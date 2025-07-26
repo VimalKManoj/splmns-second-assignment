@@ -103,7 +103,6 @@ export default function VideoWatcher() {
         <span className="text-xl text-white">15 seconds</span> of enchanted
         footage to claim your next Elemental Shard.
       </p>
-
       <div className="relative">
         <video
           ref={videoRef}
@@ -121,7 +120,25 @@ export default function VideoWatcher() {
           </div>
         )}
       </div>
-
+      {/* Fallback simulate button */}
+      {!rewarded && cooldown === 0 && (
+        <div className="text-center mb-4">
+          <button
+            onClick={() => {
+              saveReward();
+              setRewarded(true);
+              setMessage(
+                "🛠 Video simulated! You’ve unlocked a new Elemental Shard."
+              );
+              localStorage.setItem(COMPLETED_KEY, "1");
+              localStorage.setItem(VIDEO_COOLDOWN_KEY, Date.now().toString());
+            }}
+            className="text-sm underline text-white hover:text-cyan-300 cursor-pointer"
+          >
+            Video not loading? Simulate
+          </button>
+        </div>
+      )}
       {message && (
         <div className="flex flex-col gap-2 justify-center items-center">
           <p className={`mt-2  ${turretRoad.className} text-center`}>
