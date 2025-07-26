@@ -145,9 +145,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-end gap-10 md:gap-0 items-end z-50">
+      <div className="flex flex-col md:flex-row justify-end gap-10 md:gap-6 items-end z-50">
         <h1
-          className={`z-40 ${turretRoad.className} mt-20 md:mt-0 text-5xl flex-1 text-white lg:text-nowrap relative`}
+          className={`z-40 ${turretRoad.className} mt-20 md:mt-0 text-5xl flex-1 text-white xl:text-nowrap relative`}
         >
           <Image
             src="/elements/earth-two.png"
@@ -170,7 +170,8 @@ export default function Home() {
             height={300}
             className="object-contain w-auto h-22 absolute -top-20 md:-top-16  left-40"
           />
-          Unlock the Power of the <span className="lg:text-8xl">3</span>
+          Unlock the Power of the{" "}
+          <span className="md:text-6xl xl:text-8xl">3</span>
         </h1>
         <h1
           className={`w-full md:w-2/4 text-white/80 ${play.className} p-6 border border-[#25D2BE]  text-sm text-white bg-black/30 backdrop-blur-sm`}

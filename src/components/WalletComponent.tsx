@@ -153,7 +153,7 @@ export default function WalletComponent({
 
   return (
     <div
-      className={`p-6 max-w-7xl mx-auto pt-28 w-full min-h-screen md:h-screen  z-40 flex flex-col gap-6 md:gap-10 relative ${play.className}`}
+      className={`p-6 max-w-7xl mx-auto pt-28 w-full min-h-screen md:h-screen  z-40 flex flex-col gap-6 md:gap-10 relative ${play.className} overflow-x-hidden`}
       ref={container}
     >
       <div className="flex justify-center md:justify-between items-center flex-wrap">

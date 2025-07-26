@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Shard } from "../WalletComponent";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 // const play = Play({
 //   variable: "--font-play",
@@ -40,6 +41,22 @@ function RewardUnlocked({
           duration: 1.5,
           opacity: 1,
           y: 0,
+          filter: "blur(0px)",
+          ease: "power2.out",
+          stagger: 0.3,
+        }
+      );
+
+      gsap.fromTo(
+        ".button",
+        {
+          opacity: 0,
+          filter: "blur(10px)",
+        },
+        {
+          duration: 1.5,
+          opacity: 1,
+          delay: 0.5,
           filter: "blur(0px)",
           ease: "power2.out",
           stagger: 0.3,
@@ -106,10 +123,18 @@ function RewardUnlocked({
           Congratulations, Explorer! You’ve uncovered the {shard} Shard
         </h1>
       </div>
-
+      <div className="flex gap-6 flex-col md:flex-row justify-center items-center">
+        <Link
+          href={"/"}
+          onClick={onClose}
+          className="button opacity-0 bg-gradient-to-b token from-[#30ba42] to-[#14621f] text-white px-4 py-2  mr-2 cursor-pointer hover:shadow-xl transition-all duration-300 shadow-purple-300"
+        >
+          Go to Next Task
+        </Link>
+      </div>
       <button
         onClick={onClose}
-        className="bg-gradient-to-b token from-[#bb7ffd] to-[#171a46]/70 text-white px-4 py-2  mr-2 cursor-pointer hover:shadow-xl transition-all duration-300 shadow-purple-300"
+        className="button opacity-0 bg-gradient-to-b token from-[#bb7ffd] to-[#171a46]/70 text-white px-4 py-2  mr-2 cursor-pointer hover:shadow-xl transition-all duration-300 shadow-purple-300"
       >
         Back to Wallet
       </button>
