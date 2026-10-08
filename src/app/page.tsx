@@ -114,7 +114,7 @@ export default function Home() {
         <ActionCard
           title="Check In at the Landmark"
           description="Arrive at the designated location to unlock your next Shard."
-          imageSrc="/location.png"
+          imageSrc="/location.webp"
           href="/location-checkin"
           cooldown={cds.location}
           enabled={true}
@@ -125,7 +125,7 @@ export default function Home() {
           <ActionCard
             title="Watch the Mystic Chronicle"
             description="View 15 seconds of the mystic video to claim your next Shard."
-            imageSrc="/video.png"
+            imageSrc="/video.webp"
             href={unlocked.video ? "/video-watch" : "#"}
             cooldown={cds.video}
             enabled={unlocked.video}
@@ -137,7 +137,7 @@ export default function Home() {
           <ActionCard
             title="Scan the Arcane Sigil"
             description="Use your camera to scan the hidden QR sigil and unveil your next Shard."
-            imageSrc="/qr-code.png"
+            imageSrc="/qr-code.webp"
             href={unlocked.code ? "/qr-scan" : "#"}
             cooldown={cds.code}
             enabled={unlocked.code}

@@ -22,9 +22,9 @@ const play = Play({
 // Avatar icons
 const AVATAR_ICONS = [
   "/avatar-one.png",
-  "/avatar-two.png",
+  "/avatar-two.webp",
   "/avatar-three.png",
-  "/avatar-four.png",
+  "/avatar-four.webp",
 ];
 
 // Reward event & shard types

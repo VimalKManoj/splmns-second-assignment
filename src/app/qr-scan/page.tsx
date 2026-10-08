@@ -7,7 +7,7 @@ function QRScan() {
     <div className="min-h-screen flex justify-center items-center w-full ">
       <div className="absolute top-0 left-0 w-full h-full ">
         <Image
-          src="/qr-code-background.png"
+          src="/qr-code-background.webp"
           alt="background"
           width={1000}
           fetchPriority="high"
